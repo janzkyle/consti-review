@@ -103,8 +103,8 @@ class LoginPage extends Component {
           </Col>
         </Col>
         <Col lg={6} style={style.logoContainer}>
-          <h1 style={style.formHeader}>
-            AECES LOGO
+          <h1 style={{fontFamily: "'Roboto Mono', monospace"}}>
+            AECES Logo Here
           </h1>
         </Col>
       </Grid>
