@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor'
 import { withTracker } from 'meteor/react-meteor-data'
 
-import { Grid, Row } from 'react-bootstrap'
+import { Grid, Row, Col } from 'react-bootstrap'
 import { Paper, RaisedButton } from 'material-ui'
 import { yellow400, grey800, white } from 'material-ui/styles/colors'
 import Input from './Input'
@@ -10,15 +10,21 @@ import Input from './Input'
 const style = {
   page: {
     minHeight: '100vh',
+    padding: 0,
+    backgroundColor: yellow400,
+  },
+  formContainer: {
     display: 'flex',
+    height: '100vh',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: yellow400,
+    padding: 0,
   },
   form: {
     display: 'inline-block',
     borderStyle: 'dashed',
-    padding: '25px 5% 50px 5%',
+    margin: 10,
+    padding: '25px 10% 50px 10%',
     backgroundColor: white,
   },
   formHeader: {
@@ -55,7 +61,15 @@ const style = {
       letterSpacing: 5,
     },
     backgroundColor: yellow400,
-  }
+  },
+  logoContainer: {
+    display: 'flex',
+    height: '100vh',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
+    backgroundColor: white,
+  },
 }
 
 // App component - represents the whole app
@@ -63,29 +77,36 @@ class LoginPage extends Component {
   render() {
     return (
       <Grid fluid={true} style={style.page}>
-        <div style={style.form}>
-          <h1 style={style.formHeader}> AECES Comelec System </h1>
-          <Input
-            floatingLabelText="E-mail"
-            style={style.formInput.custom}
-            underlineStyle={style.formInput.underlineStyle}
-            underlineFocusStyle={style.formInput.underlineFocusStyle}
-            floatingLabelStyle={style.formInput.floatingLabelStyle}
-            floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
-          <Input
-            floatingLabelText="Password"
-            style={style.formInput.custom}
-            underlineStyle={style.formInput.underlineStyle}
-            underlineFocusStyle={style.formInput.underlineFocusStyle}
-            floatingLabelStyle={style.formInput.floatingLabelStyle}
-            floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
-          <Row style={style.formSubmitContainer}>
-            <RaisedButton
-              label="Submit"
-              labelStyle={style.formSubmit.labelStyle}
-              backgroundColor={style.formSubmit.backgroundColor} />
-          </Row>
-        </div>
+        <Col lg={6} style={style.formContainer}>
+          <Col lg={8} xs={12} style={style.form}>
+            <h1 style={style.formHeader}> AECES Comelec System </h1>
+            <Input
+              floatingLabelText="E-mail"
+              style={style.formInput.custom}
+              underlineStyle={style.formInput.underlineStyle}
+              underlineFocusStyle={style.formInput.underlineFocusStyle}
+              floatingLabelStyle={style.formInput.floatingLabelStyle}
+              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
+            <Input
+              floatingLabelText="Password"
+              style={style.formInput.custom}
+              underlineStyle={style.formInput.underlineStyle}
+              underlineFocusStyle={style.formInput.underlineFocusStyle}
+              floatingLabelStyle={style.formInput.floatingLabelStyle}
+              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
+            <Row style={style.formSubmitContainer}>
+              <RaisedButton
+                label="Submit"
+                labelStyle={style.formSubmit.labelStyle}
+                backgroundColor={style.formSubmit.backgroundColor} />
+            </Row>
+          </Col>
+        </Col>
+        <Col lg={6} style={style.logoContainer}>
+          <h1 style={style.formHeader}>
+            AECES LOGO
+          </h1>
+        </Col>
       </Grid>
     )
   }
