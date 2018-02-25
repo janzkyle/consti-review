@@ -77,6 +77,11 @@ class LoginPage extends Component {
   render() {
     return (
       <Grid fluid={true} style={style.page}>
+        <Col lg={6} style={style.logoContainer}>
+          <h1 style={{fontFamily: "'Roboto Mono', monospace"}}>
+            AECES Logo Here
+          </h1>
+        </Col>
         <Col lg={6} style={style.formContainer}>
           <Col lg={8} xs={12} style={style.form}>
             <h1 style={style.formHeader}> AECES Comelec System </h1>
@@ -102,11 +107,6 @@ class LoginPage extends Component {
                 backgroundColor={style.formSubmit.backgroundColor} />
             </Row>
           </Col>
-        </Col>
-        <Col lg={6} style={style.logoContainer}>
-          <h1 style={{fontFamily: "'Roboto Mono', monospace"}}>
-            AECES Logo Here
-          </h1>
         </Col>
       </Grid>
     )
