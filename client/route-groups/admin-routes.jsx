@@ -3,7 +3,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import { mount } from 'react-mounter'
 
 import App from '/imports/ui/App'
-import LoginPage from '/imports/ui/LoginPage'
 
 var adminRoutes = FlowRouter.group({
   name: 'admin',
@@ -11,7 +10,7 @@ var adminRoutes = FlowRouter.group({
 })
 
 adminRoutes.route('/dashboard', {
-  name: 'Log-In',
+  name: 'admin-dashboard',
   action(){
     mount( App, {
       content: 'Admin Dashboard'

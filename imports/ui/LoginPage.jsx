@@ -88,6 +88,7 @@ class LoginPage extends Component {
               floatingLabelStyle={style.formInput.floatingLabelStyle}
               floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
             <Input
+              type="password"
               floatingLabelText="Password"
               style={style.formInput.custom}
               underlineStyle={style.formInput.underlineStyle}

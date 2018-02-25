@@ -4,6 +4,7 @@ import { mount } from 'react-mounter'
 
 import App from '/imports/ui/App'
 import LoginPage from '/imports/ui/LoginPage'
+import AdminLoginPage from '/imports/ui/AdminLoginPage'
 
 var exposedRoutes = FlowRouter.group({
   name: 'public'
@@ -23,6 +24,15 @@ exposedRoutes.route('/login', {
   action(){
     mount( App, {
       content: <LoginPage />
+    })
+  }
+})
+
+exposedRoutes.route('/admin/login', {
+  name: 'admin-login',
+  action(){
+    mount( App, {
+      content: <AdminLoginPage />
     })
   }
 })
