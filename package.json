@@ -12,6 +12,7 @@
     "react": "^15.6.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.6.2",
-    "react-mounter": "^1.2.0"
+    "react-mounter": "^1.2.0",
+    "react-swipeable-views": "^0.12.13"
   }
 }

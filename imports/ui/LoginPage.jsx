@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor'
+import { FlowRouter } from 'meteor/kadira:flow-router'
 import { withTracker } from 'meteor/react-meteor-data'
 
 import { Grid, Row, Col } from 'react-bootstrap'
 import { Paper, RaisedButton } from 'material-ui'
-import { yellow400, grey800, white } from 'material-ui/styles/colors'
+import { yellow400, grey800, red500, white } from 'material-ui/styles/colors'
 import Input from './Input'
+import Logo from './Logo'
 
 const style = {
   page: {
@@ -13,23 +15,28 @@ const style = {
     padding: 0,
     backgroundColor: yellow400,
   },
-  formContainer: {
+  formSection: {
     display: 'flex',
     height: '100vh',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 0,
+    padding: 10,
   },
   form: {
     display: 'inline-block',
     borderStyle: 'dashed',
-    margin: 10,
     padding: '25px 10% 50px 10%',
     backgroundColor: white,
   },
   formHeader: {
     marginBottom: 35,
-    fontFamily: "'Shadows Into Light', cursive",
+    fontFamily: "'Cormorant Garamond', serif",
+    textAlign: 'center'
+  },
+  formError: {
+    padding: '10px 0 10px 0',
+    backgroundColor: red500,
+    color: white,
     textAlign: 'center'
   },
   formInput: {
@@ -62,7 +69,7 @@ const style = {
     },
     backgroundColor: yellow400,
   },
-  logoContainer: {
+  logoSection: {
     display: 'flex',
     height: '100vh',
     alignItems: 'center',
@@ -73,25 +80,56 @@ const style = {
 }
 
 // App component - represents the whole app
-class LoginPage extends Component { 
-  render() {
+class LoginPage extends Component {
+  constructor () {
+    super()
+    this.state = {
+      email: '',
+      password: '',
+      isErrorHidden: true,
+    }
+
+    this.handleLogin.bind(this)
+    this.handleOnChange.bind(this)
+  }
+
+  handleLogin = () => {
+    Meteor.loginWithPassword(this.state.email, this.state.password, (err) => {
+      if (err)
+        this.setState({ isErrorHidden: false })
+      else {
+        this.setState({ isErrorHidden: true }, (err) => {
+          if (err) throw err
+          FlowRouter.go('/dashboard')
+        })
+      }
+    })
+  }
+  
+  handleOnChange = (key, value) => {
+    this.setState({ [key]: value })
+  }
+
+  render () {
     return (
       <Grid fluid={true} style={style.page}>
-        <Col lg={6} style={style.logoContainer}>
-          <h1 style={{fontFamily: "'Roboto Mono', monospace"}}>
-            AECES Logo Here
-          </h1>
-        </Col>
-        <Col lg={6} style={style.formContainer}>
+        <Col lg={6} style={style.logoSection}>
+          <Logo />
+        </Col>  
+        <Col lg={6} style={style.formSection}>
           <Col lg={8} xs={12} style={style.form}>
-            <h1 style={style.formHeader}> AECES Comelec System </h1>
+            <h1 style={style.formHeader}> Log In </h1>
+            <h5 style={style.formError} hidden={this.state.isErrorHidden}>
+              Error: Incorrect Username or Password
+            </h5>
             <Input
               floatingLabelText="E-mail"
               style={style.formInput.custom}
               underlineStyle={style.formInput.underlineStyle}
               underlineFocusStyle={style.formInput.underlineFocusStyle}
               floatingLabelStyle={style.formInput.floatingLabelStyle}
-              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
+              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
+              onChange={(e) => this.handleOnChange('email', e.target.value)} />
             <Input
               type="password"
               floatingLabelText="Password"
@@ -99,12 +137,14 @@ class LoginPage extends Component {
               underlineStyle={style.formInput.underlineStyle}
               underlineFocusStyle={style.formInput.underlineFocusStyle}
               floatingLabelStyle={style.formInput.floatingLabelStyle}
-              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle} />
+              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
+              onChange={(e) => this.handleOnChange('password', e.target.value)} />
             <Row style={style.formSubmitContainer}>
               <RaisedButton
                 label="Submit"
                 labelStyle={style.formSubmit.labelStyle}
-                backgroundColor={style.formSubmit.backgroundColor} />
+                backgroundColor={style.formSubmit.backgroundColor}
+                onClick={() => this.handleLogin()} />
             </Row>
           </Col>
         </Col>

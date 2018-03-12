@@ -25,7 +25,7 @@ const style = {
   },
   formHeader: {
     marginBottom: 35,
-    fontFamily: "'Shadows Into Light', cursive",
+    fontFamily: "'Cormorant Garamond', serif",
     textAlign: 'center'
   },
   formInput: {

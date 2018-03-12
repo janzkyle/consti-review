@@ -1,1 +1,51 @@
 /* CSS declarations go here */
+
+/* AECES LOGO */
+#logo-container-left {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+#logo-container-right {
+  padding: 0px 50px 0px 50px;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+#logo-container-left::before, #logo-container-left::after {
+  left: 0;
+  top: 0;
+  content: '';
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+
+#logo-container-right::before, #logo-container-right::after {
+  right: 0;
+  bottom: 0;
+  content: '';
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+
+
+#logo-container-left::after{
+  border-width: 1.35em;
+  border-left-color: #FFC800;
+  border-top-color: #FFC800;
+}
+
+#logo-container-right::after {
+  border-width: 1.35em;
+  border-right-color: #FFC800;
+  border-bottom-color: #FFC800;
+}
+
+#logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5em;
+}
