@@ -16,7 +16,7 @@ class LogoutButton extends Component {
   onClick = () => {
     Meteor.logout((err) => {
       if (err) throw err
-      FlowRouter.go('/login')
+      FlowRouter.redirect('/login')
     })
   }
 

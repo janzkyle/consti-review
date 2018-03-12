@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 import { withTracker } from 'meteor/react-meteor-data'
 
 import { Grid, Row, Col } from 'react-bootstrap'
 import { Paper, RaisedButton } from 'material-ui'
-import { yellow400, grey800, red500, white } from 'material-ui/styles/colors'
+import { yellow400, grey800, green500, red500, white } from 'material-ui/styles/colors'
 import Input from './Input'
 import Logo from './Logo'
 
-const style = {
+var style = {
   page: {
     minHeight: '100vh',
     padding: 0,
@@ -31,6 +32,12 @@ const style = {
   formHeader: {
     marginBottom: 35,
     fontFamily: "'Cormorant Garamond', serif",
+    textAlign: 'center'
+  },
+  formSuccess: {
+    padding: '10px 0 10px 0',
+    backgroundColor: green500,
+    color: white,
     textAlign: 'center'
   },
   formError: {
@@ -78,43 +85,45 @@ const style = {
     padding: 0,
     backgroundColor: white,
   },
-  forgotPasswordButton: {
-    labelStyle: {
-      fontFamily: "'Roboto Mono', monospace",
-      letterSpacing: 5,
-    },
-  }
 }
-
 // App component - represents the whole app
-class LoginPage extends Component {
+class ForgotPassword extends Component {
   constructor () {
     super()
     this.state = {
       email: '',
       password: '',
-      isErrorHidden: true,
+      isSuccessHidden: true,
+      isError: null,
+      message: '',
+      disableButton: false
     }
 
-    this.handleLogin.bind(this)
+    this.handleOnClick.bind(this)
     this.handleOnChange.bind(this)
   }
 
-  handleLogin = () => {
-    Meteor.loginWithPassword(this.state.email, this.state.password, (err) => {
-      if (err)
-        this.setState({ isErrorHidden: false })
-      else {
-        this.setState({ isErrorHidden: true }, (err) => {
-          if (err) throw err
-          FlowRouter.redirect('/dashboard')
-        })
-      }
+  handleOnClick = () => {
+    this.setState({ disableButton: true }, () => {
+      Accounts.forgotPassword({ email: this.state.email }, (err) => {
+        if (err) {
+          this.setState({
+            isError: true,
+            isSuccessHidden: false,
+            message: 'Error Occured :(',
+            disableButton: false
+          })
+          throw err
+        }
+        else
+          this.setState({
+            isError: false,
+            isSuccessHidden: false,
+            message: 'Success: Check your email!',
+            disableButton: false
+          })
+      })
     })
-  }
-
-  handleOnForgotPassword = () => {
-    FlowRouter.redirect('/forgot-password')
   }
   
   handleOnChange = (key, value) => {
@@ -126,12 +135,12 @@ class LoginPage extends Component {
       <Grid fluid={true} style={style.page}>
         <Col lg={6} style={style.logoSection}>
           <Logo />
-        </Col>  
+        </Col>
         <Col lg={6} style={style.formSection}>
           <Col lg={8} xs={12} style={style.form}>
-            <h1 style={style.formHeader}> Log In </h1>
-            <h5 style={style.formError} hidden={this.state.isErrorHidden}>
-              Error: Incorrect Username or Password
+            <h1 style={style.formHeader}> Forgot Password </h1>
+            <h5 style={this.state.isError ? style.formError:style.formSuccess} hidden={this.state.isSuccessHidden}>
+              {this.state.message}
             </h5>
             <Input
               floatingLabelText="E-mail"
@@ -141,29 +150,21 @@ class LoginPage extends Component {
               floatingLabelStyle={style.formInput.floatingLabelStyle}
               floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
               onChange={(e) => this.handleOnChange('email', e.target.value)} />
-            <Input
-              type="password"
-              floatingLabelText="Password"
-              style={style.formInput.custom}
-              underlineStyle={style.formInput.underlineStyle}
-              underlineFocusStyle={style.formInput.underlineFocusStyle}
-              floatingLabelStyle={style.formInput.floatingLabelStyle}
-              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
-              onChange={(e) => this.handleOnChange('password', e.target.value)} />
-            <Row style={style.formSubmitContainer}>
-              <RaisedButton
-                label="Submit"
-                labelStyle={style.formSubmit.labelStyle}
-                backgroundColor={style.formSubmit.backgroundColor}
-                onClick={() => this.handleLogin()} />
-            </Row>
             <Row style={style.formSubmitContainer}>
               <RaisedButton
                 label="Forgot Password"
-                style={style.forgotPasswordButton}
-                labelStyle={style.forgotPasswordButton.labelStyle}
+                labelStyle={style.formSubmit.labelStyle}
+                disabled={this.state.disableButton}
                 primary={true}
-                onClick={() => this.handleOnForgotPassword()} />
+                onClick={() => this.handleOnClick()} />
+            </Row>
+
+            <Row style={style.formSubmitContainer}>
+              <RaisedButton
+                label="Back"
+                labelStyle={style.formSubmit.labelStyle}
+                backgroundColor={style.formSubmit.backgroundColor}
+                onClick={() => FlowRouter.redirect('/login')} />
             </Row>
           </Col>
         </Col>
@@ -172,12 +173,12 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage
+export default ForgotPassword
 
 // export default withTracker(() => {
 //   return {
 //     users: Meteor.users.find({}).fetch,
 //   }
-// })(LoginPage)
+// })(ForgotPassword)
 
 // db.votes.insert({ voter_id:132694, position:"PRESIDENT", candidate_id: 1, createdAt: new Date() });

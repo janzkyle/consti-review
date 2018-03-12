@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor'
-import { withTracker } from 'meteor/react-meteor-data'
+import { Accounts } from 'meteor/accounts-base'
 
 import { Grid, Row, Col } from 'react-bootstrap'
 import { Divider, RaisedButton, TextField } from 'material-ui'
@@ -12,19 +12,18 @@ const style = {
   },
   instructionsHeader: {
     fontWeight: 700,
-    margin: "50px 0 10px 0",
+    margin: "10px 0 10px 0",
     textAlign: "center"
   },
   instructionRow: {
     display: "flex",
     justifyContent: "center",
   },
-  changePasswordRow: {
+  buttonRow: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    flexWrap: "wrap"
-  }, 
+    flexWrap: "wrap",
+  },
   formInput: {
     underlineStyle: {
       borderColor: grey800
@@ -32,26 +31,24 @@ const style = {
     underlineFocusStyle: {
       borderColor: grey800
     },
-    inputStyle: {
-      textAlign: "center",
+    floatingLabelStyle: {
+      color: grey800,
     },
-    hintTextStyle: {
-      width: 250,
-      textAlign: "center",
+    floatingLabelFocusStyle: {
+      color: grey800,
     },
     custom: {
       width: 250,
-      marginTop: 10,
       textAlign: "center",
       fontFamily: "'Roboto Mono', monospace",
     }
   },
   changeButton: {
-    marginLeft: 10
+    margin: 10  
   },
   divider: {
     backgroundColor: grey500,
-    marginBottom: 30,
+    marginBottom: 10,
   }
 }
 
@@ -59,20 +56,29 @@ class InstructionsPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      password: '',
+      oldPassword: '',
+      newPassword: '',
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
-    this.handleOnClick = this.handleOnClick.bind(this)
+    this.handleOnSubmit = this.handleOnSubmit.bind(this)
   }
 
-  handleOnChange = (e) => {
+  handleOnChange = (key, e) => {
     e.preventDefault()
-    this.setState({ password: e.target.value })
+    this.setState({ [key]: e.target.value })
   }
 
-  handleOnClick = () => {
+  handleOnSubmit = () => {
     // @TODO: change password
+    Accounts.changePassword(this.state.oldPassword, this.state.newPassword, (err) => {
+      if (err) {
+        console.log(err)
+        throw err
+      } else {
+        console.log("Success")
+      }
+    })
   }
 
   render() {
@@ -85,24 +91,35 @@ class InstructionsPage extends Component {
             <div style={style.instructionRow}>
               <h3 style={{textAlign:"center"}}> 1. Change your password below: </h3>
             </div>
-            <Row style={style.changePasswordRow}>
-              <div>
-                <TextField 
-                  type="password"
-                  value={this.state.password}
-                  hintText="Change Password"
-                  style={style.formInput.custom}
-                  underlineStyle={style.formInput.underlineStyle}
-                  underlineFocusStyle={style.formInput.underlineFocusStyle}
-                  onChange={(e) => this.handleOnChange(e)} />
-              </div>
-              <div>
-                <RaisedButton
-                  label="Change"
-                  style={style.changeButton}
-                  primary={true}
-                  onClick={() => this.handleOnClick()} />
-              </div>
+            <Row style={style.instructionRow}>
+              <TextField 
+                type="password"
+                value={this.state.password}
+                floatingLabelText="Old Password"
+                style={style.formInput.custom}
+                underlineStyle={style.formInput.underlineStyle}
+                underlineFocusStyle={style.formInput.underlineFocusStyle}
+                floatingLabelStyle={style.formInput.floatingLabelStyle}
+                floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
+                onChange={(e) => this.handleOnChange("oldPassword", e)} />
+            </Row>
+            <Row style={style.instructionRow}>
+              <TextField 
+                type="password"
+                value={this.state.password}
+                floatingLabelText="New Password"
+                style={style.formInput.custom}
+                underlineStyle={style.formInput.underlineStyle}
+                underlineFocusStyle={style.formInput.underlineFocusStyle}
+                floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
+                onChange={(e) => this.handleOnChange("newPassword", e)} />
+            </Row>
+            <Row style={style.buttonRow}>
+              <RaisedButton
+                label="Change"
+                style={style.changeButton}
+                primary={true}
+                onClick={() => this.handleOnSubmit()} />
             </Row>
             <Row style={style.instructionRow}>
               <h3 style={{textAlign:"center"}}> 2. Please tick the candidate you are voting for </h3>
