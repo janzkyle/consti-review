@@ -4,7 +4,7 @@ import { Accounts } from 'meteor/accounts-base'
 
 import { Grid, Row, Col } from 'react-bootstrap'
 import { Divider, RaisedButton, TextField } from 'material-ui'
-import { grey500, grey800 } from 'material-ui/styles/colors'
+import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
 
 const style = {
   page: {
@@ -18,6 +18,7 @@ const style = {
   instructionRow: {
     display: "flex",
     justifyContent: "center",
+    color: grey700
   },
   buttonRow: {
     display: "flex",
@@ -38,8 +39,6 @@ const style = {
       color: grey800,
     },
     custom: {
-      width: 250,
-      textAlign: "center",
       fontFamily: "'Roboto Mono', monospace",
     }
   },
