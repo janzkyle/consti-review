@@ -104,25 +104,25 @@ class ForgotPassword extends Component {
   }
 
   handleOnClick = () => {
-    this.setState({ disableButton: true }, () => {
-      Accounts.forgotPassword({ email: this.state.email }, (err) => {
-        if (err) {
-          this.setState({
-            isError: true,
-            isSuccessHidden: false,
-            message: 'Error Occured :(',
-            disableButton: false
-          })
-          throw err
-        }
-        else
-          this.setState({
-            isError: false,
-            isSuccessHidden: false,
-            message: 'Success: Check your email!',
-            disableButton: false
-          })
-      })
+    this.setState({ disableButton: true })
+
+    Accounts.forgotPassword({ email: this.state.email }, (err) => {
+      if (err) {
+        this.setState({
+          isError: true,
+          isSuccessHidden: false,
+          message: 'Error Occured :(',
+          disableButton: false
+        })
+        throw err
+      }
+      else
+        this.setState({
+          isError: false,
+          isSuccessHidden: false,
+          message: 'Success: Check your email!',
+          disableButton: false
+        })
     })
   }
   

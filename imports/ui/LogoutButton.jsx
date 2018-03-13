@@ -22,7 +22,7 @@ class LogoutButton extends Component {
 
   render () {
     return (
-      <div>
+      <div alt="Log Out">
         <RaisedButton
           labelPosition="before"
           secondary={true}

@@ -9,6 +9,7 @@ import SwipeableViews from 'react-swipeable-views'
 
 import NavBar from './NavBar'
 import InstructionsPage from './InstructionsPage'
+import VotingPage from './VotingPage'
 
 const style = {
   page: {
@@ -52,7 +53,7 @@ class Dashboard extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange} >
           <div> <InstructionsPage /> </div>
-          <div> slide n°2 </div>
+          <div> <VotingPage /> </div>
         </SwipeableViews>
       </div>
     )

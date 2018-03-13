@@ -9,6 +9,13 @@ import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
 const style = {
   page: {
     fontFamily: "'Roboto Mono', monospace",
+    minHeight: "calc(100vh - 100px)"
+  },
+  formContainer: {
+    minHeight: "calc(100vh - 100px)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   instructionsHeader: {
     fontWeight: 700,
@@ -83,8 +90,8 @@ class InstructionsPage extends Component {
   render() {
     return(
       <Grid style={style.page}>
-        <Row>
-          <Col lg={8} lgOffset={2} xs={10} xsOffset={1}>
+        <Row style={style.formContainer}>
+          <Col lg={10}>
             <Row style={style.instructionsHeader}> <h1> INSTRUCTIONS </h1> </Row>
             <Divider style={style.divider}/>
             <div style={style.instructionRow}>
