@@ -91,7 +91,7 @@ class InstructionsPage extends Component {
     return(
       <Grid style={style.page}>
         <Row style={style.formContainer}>
-          <Col lg={10}>
+          <Col lg={8} md={10} xs={10}>
             <Row style={style.instructionsHeader}> <h1> INSTRUCTIONS </h1> </Row>
             <Divider style={style.divider}/>
             <div style={style.instructionRow}>

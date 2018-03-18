@@ -82,7 +82,7 @@ class VotingPage extends Component {
     return(
       <Grid style={style.page}>
         <Row style={style.formContainer}>
-          <Col lg={10}>
+          <Col lg={10} md={10} xs={10}>
             <Row style={style.instructionsHeader}> <h1> VOTING </h1> </Row>
             <Divider style={style.divider}/>
           </Col>  
