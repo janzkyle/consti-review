@@ -124,7 +124,7 @@ class LoginPage extends Component {
   render () {
     return (
       <Grid fluid={true} style={style.page}>
-        <Col lg={6} style={style.logoSection}>
+        <Col smHidden lg={6} style={style.logoSection}>
           <Logo />
         </Col>  
         <Col lg={6} style={style.formSection}>

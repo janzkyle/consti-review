@@ -100,7 +100,7 @@ class InstructionsPage extends Component {
             <Row style={style.instructionRow}>
               <TextField 
                 type="password"
-                value={this.state.password}
+                value={this.state.oldPassword}
                 floatingLabelText="Old Password"
                 style={style.formInput.custom}
                 underlineStyle={style.formInput.underlineStyle}
@@ -112,11 +112,12 @@ class InstructionsPage extends Component {
             <Row style={style.instructionRow}>
               <TextField 
                 type="password"
-                value={this.state.password}
+                value={this.state.newPassword}
                 floatingLabelText="New Password"
                 style={style.formInput.custom}
                 underlineStyle={style.formInput.underlineStyle}
                 underlineFocusStyle={style.formInput.underlineFocusStyle}
+                floatingLabelStyle={style.formInput.floatingLabelStyle}
                 floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
                 onChange={(e) => this.handleOnChange("newPassword", e)} />
             </Row>
