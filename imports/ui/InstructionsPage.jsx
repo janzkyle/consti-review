@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Divider, RaisedButton, TextField } from 'material-ui'
+import { Divider, RaisedButton, TextField, Snackbar } from 'material-ui'
 import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
 
 const style = {
@@ -19,7 +19,7 @@ const style = {
   },
   instructionsHeader: {
     fontWeight: 700,
-    margin: "10px 0 10px 0",
+    margin: "25px 0 10px 0",
     textAlign: "center"
   },
   instructionRow: {
@@ -64,6 +64,8 @@ class InstructionsPage extends Component {
     this.state = {
       oldPassword: '',
       newPassword: '',
+      open: false,
+      message: "",
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -79,12 +81,24 @@ class InstructionsPage extends Component {
     // @TODO: change password
     Accounts.changePassword(this.state.oldPassword, this.state.newPassword, (err) => {
       if (err) {
-        console.log(err)
-        throw err
+        this.setState({
+            message: "Error changing password"
+          }, () => {
+            this.setState({ open: true, })
+            throw err
+          })
       } else {
-        console.log("Success")
+        this.setState({
+            message: "Successfully changed password"
+          }, () => {
+            this.setState({ open: true, })
+          })
       }
     })
+  }
+
+  handleRequestClose = () => {
+    this.setState({ open: false, })
   }
 
   render() {
@@ -137,7 +151,13 @@ class InstructionsPage extends Component {
             <Row style={style.instructionRow}>
               <h3 style={{textAlign:"center"}}> 4. Hit <strong>Submit</strong>! </h3>
             </Row>
-          </Col>  
+          </Col>
+          <Snackbar
+            open={this.state.open}
+            message={this.state.message}
+            autoHideDuration={2000}
+            onRequestClose={this.handleRequestClose}
+          />
         </Row>
       </Grid>
     )

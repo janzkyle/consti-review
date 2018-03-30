@@ -23,20 +23,19 @@ class VotingRow extends Component {
       <Grid fluid={true}>
         <Row> <h2>{ this.props.positionName }</h2> </Row>
         <Row>
-          <RadioButtonGroup name={this.props.positionCode}>
-          {
-            this.props.candidates.map((candidate, key) => {
-              return (
-                <RadioButton
-                  label={candidate.name}
-                  value={candidate.id}
-                  key={key}/>
-              )
-            })
-          }
-            <RadioButton
-              label="Abstain"
-              value="abstain" />
+          <RadioButtonGroup
+            name={this.props.positionCode}
+            onChange={(e) => this.props.onChange(this.props.positionCode, e) } >
+            {
+              this.props.candidates.map((candidate, key) => {
+                return (
+                  <RadioButton
+                    label={candidate.name}
+                    value={candidate.id}
+                    key={key}/>
+                )
+              })
+            }
           </RadioButtonGroup>
         </Row>
       </Grid>
