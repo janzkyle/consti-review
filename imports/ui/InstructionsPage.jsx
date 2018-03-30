@@ -9,10 +9,9 @@ import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
 const style = {
   page: {
     fontFamily: "'Roboto Mono', monospace",
-    minHeight: "calc(100vh - 100px)"
+    marginBottom: 25,
   },
   formContainer: {
-    minHeight: "calc(100vh - 100px)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center"

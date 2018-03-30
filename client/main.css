@@ -49,3 +49,53 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 5em;
 }
+
+/* FOOTER */
+#footer-container {
+  min-height: 275px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 75px;
+  padding-right: 75px;
+  background-color: #424242;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+#footer-end {
+  min-height: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 75px;
+  padding-right: 75px;
+  background-color: #212121;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+#footer-end-content {
+  font-family: 'Roboto Mono', monospace;
+  height: 100%;
+  width: 100%;
+}
+#footer-media-list {
+  list-style: none;
+}
+.footer-media-list-item {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+.footer-accounts-header {
+  font-family: 'Roboto Mono', monospace;
+}
+#footer {
+  display: block;
+}
+#linkedin-link:hover {
+  color: #FFEB3B;
+  background-color: #3F51B5;
+}
+#linkedin-link {
+  color: #212121;
+  background-color: #FFEB3B;
+  text-decoration: none;
+}

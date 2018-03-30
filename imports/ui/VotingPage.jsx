@@ -11,10 +11,8 @@ import VotingRow from './VotingRow'
 const style = {
   page: {
     fontFamily: "'Roboto Mono', monospace",
-    minHeight: "calc(100vh - 100px)"
   },
   formContainer: {
-    minHeight: "calc(100vh - 100px)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
@@ -182,9 +180,13 @@ class VotingPage extends Component {
         <Row style={style.formContainer}>
           <Col>
             <Row style={{marginTop:25}}>
+              <Row>
+                <Col lg={10} lgOffset={1} xs={10} xsOffset={1}>
+                  <Row style={style.pageHeader}> <h1> VOTING PAGE </h1> </Row>
+                  <Divider style={style.divider}/>
+                </Col>
+              </Row>
               <Col lg={6} lgOffset={0} xs={10} xsOffset={1}>
-                <Row style={style.pageHeader}> <h1> VOTING PAGE </h1> </Row>
-                <Divider style={style.divider}/>
                 <VotingRow
                   positionCode="president"
                   positionName="President"

@@ -8,6 +8,7 @@ import { Paper, RaisedButton } from 'material-ui'
 import { yellow400, grey800, red500, white } from 'material-ui/styles/colors'
 import Input from './Input'
 import Logo from './Logo'
+import Footer from './Footer'
 
 const style = {
   page: {
@@ -123,51 +124,54 @@ class LoginPage extends Component {
 
   render () {
     return (
-      <Grid fluid={true} style={style.page}>
-        <Col smHidden lg={6} style={style.logoSection}>
-          <Logo />
-        </Col>  
-        <Col lg={6} style={style.formSection}>
-          <Col lg={8} xs={12} style={style.form}>
-            <h1 style={style.formHeader}> Log In </h1>
-            <h5 style={style.formError} hidden={this.state.isErrorHidden}>
-              Error: Incorrect Username or Password
-            </h5>
-            <Input
-              floatingLabelText="E-mail"
-              style={style.formInput.custom}
-              underlineStyle={style.formInput.underlineStyle}
-              underlineFocusStyle={style.formInput.underlineFocusStyle}
-              floatingLabelStyle={style.formInput.floatingLabelStyle}
-              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
-              onChange={(e) => this.handleOnChange('email', e.target.value)} />
-            <Input
-              type="password"
-              floatingLabelText="Password"
-              style={style.formInput.custom}
-              underlineStyle={style.formInput.underlineStyle}
-              underlineFocusStyle={style.formInput.underlineFocusStyle}
-              floatingLabelStyle={style.formInput.floatingLabelStyle}
-              floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
-              onChange={(e) => this.handleOnChange('password', e.target.value)} />
-            <Row style={style.formSubmitContainer}>
-              <RaisedButton
-                label="Submit"
-                labelStyle={style.formSubmit.labelStyle}
-                backgroundColor={style.formSubmit.backgroundColor}
-                onClick={() => this.handleLogin()} />
-            </Row>
-            <Row style={style.formSubmitContainer}>
-              <RaisedButton
-                label="Forgot Password"
-                style={style.forgotPasswordButton}
-                labelStyle={style.forgotPasswordButton.labelStyle}
-                primary={true}
-                onClick={() => this.handleOnForgotPassword()} />
-            </Row>
+      <div>
+        <Grid fluid={true} style={style.page}>
+          <Col smHidden lg={6} style={style.logoSection}>
+            <Logo />
+          </Col>  
+          <Col lg={6} style={style.formSection}>
+            <Col lg={8} xs={12} style={style.form}>
+              <h1 style={style.formHeader}> Log In </h1>
+              <h5 style={style.formError} hidden={this.state.isErrorHidden}>
+                Error: Incorrect Username or Password
+              </h5>
+              <Input
+                floatingLabelText="E-mail"
+                style={style.formInput.custom}
+                underlineStyle={style.formInput.underlineStyle}
+                underlineFocusStyle={style.formInput.underlineFocusStyle}
+                floatingLabelStyle={style.formInput.floatingLabelStyle}
+                floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
+                onChange={(e) => this.handleOnChange('email', e.target.value)} />
+              <Input
+                type="password"
+                floatingLabelText="Password"
+                style={style.formInput.custom}
+                underlineStyle={style.formInput.underlineStyle}
+                underlineFocusStyle={style.formInput.underlineFocusStyle}
+                floatingLabelStyle={style.formInput.floatingLabelStyle}
+                floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
+                onChange={(e) => this.handleOnChange('password', e.target.value)} />
+              <Row style={style.formSubmitContainer}>
+                <RaisedButton
+                  label="Submit"
+                  labelStyle={style.formSubmit.labelStyle}
+                  backgroundColor={style.formSubmit.backgroundColor}
+                  onClick={() => this.handleLogin()} />
+              </Row>
+              <Row style={style.formSubmitContainer}>
+                <RaisedButton
+                  label="Forgot Password"
+                  style={style.forgotPasswordButton}
+                  labelStyle={style.forgotPasswordButton.labelStyle}
+                  primary={true}
+                  onClick={() => this.handleOnForgotPassword()} />
+              </Row>
+            </Col>
           </Col>
-        </Col>
-      </Grid>
+        </Grid>
+        <Footer />
+      </div>
     )
   }
 }

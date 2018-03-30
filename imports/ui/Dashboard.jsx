@@ -10,6 +10,7 @@ import SwipeableViews from 'react-swipeable-views'
 import NavBar from './NavBar'
 import InstructionsPage from './InstructionsPage'
 import VotingPage from './VotingPage'
+import Footer from './Footer'
 
 const style = {
   page: {
@@ -55,6 +56,7 @@ class Dashboard extends Component {
           <div> <InstructionsPage /> </div>
           <div> <VotingPage /> </div>
         </SwipeableViews>
+        <Footer />
       </div>
     )
   }
