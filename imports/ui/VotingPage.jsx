@@ -3,8 +3,10 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Divider, RaisedButton, TextField } from 'material-ui'
+import { Divider, RaisedButton } from 'material-ui'
 import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
+
+import VotingRow from './VotingRow'
 
 const style = {
   page: {
@@ -17,9 +19,9 @@ const style = {
     alignItems: "center",
     justifyContent: "center"
   },
-  instructionsHeader: {
+  pageHeader: {
     fontWeight: 700,
-    margin: "10px 0 10px 0",
+    margin: "0 0 10px 0",
     textAlign: "center"
   },
   instructionRow: {
@@ -29,8 +31,8 @@ const style = {
   },
   buttonRow: {
     display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
+    alignItems: "center",
+    height: 100,
   },
   formInput: {
     underlineStyle: {
@@ -57,7 +59,38 @@ const style = {
     marginBottom: 10,
   }
 }
-
+const candidates = {
+  president: [
+    {
+      id: 1,
+      name: 'Al Bontogon',
+    }
+  ],
+  evp: [
+    {
+      id: 2,
+      name: 'Nica Medrano',
+    },
+  ],
+  secgen: [
+    {
+      id: 4,
+      name: 'Jonathan Ventura',
+    },
+  ],
+  finofficer: [
+    {
+      id: 5,
+      name: 'Lester Violeta',
+    },
+  ],
+  vp_ea: [
+    {
+      id: 5,
+      name: 'Shaina Loria',
+    },
+  ],
+}
 class VotingPage extends Component {
   constructor(props) {
     super(props)
@@ -66,7 +99,7 @@ class VotingPage extends Component {
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
-    this.handleOnSubmit = this.handleOnSubmit.bind(this)
+    // this.handleOnSubmit = this.handleOnSubmit.bind(this)
   }
 
   handleOnChange = (key, e) => {
@@ -74,18 +107,48 @@ class VotingPage extends Component {
     this.setState({ [key]: e.target.value })
   }
 
-  handleOnSubmit = () => {
-    // @TODO: change password
-  }
-
   render() {
     return(
       <Grid style={style.page}>
         <Row style={style.formContainer}>
-          <Col lg={10} md={10} xs={10}>
-            <Row style={style.instructionsHeader}> <h1> VOTING </h1> </Row>
+          <Col>
+            <Row style={style.pageHeader}> <h1> VOTING PAGE </h1> </Row>
             <Divider style={style.divider}/>
-          </Col>  
+            <Row style={{marginTop:25}}>
+              <Col lg={6} lgOffset={0} xs={10} xsOffset={1}>
+                <VotingRow
+                  positionCode="president"
+                  positionName="President"
+                  candidates={candidates.president} />
+                <VotingRow
+                  positionCode="evp"
+                  positionName="Executive Vice President"
+                  candidates={candidates.evp} />
+                <VotingRow
+                  positionCode="secgen"
+                  positionName="Secretary General"
+                  candidates={candidates.secgen} />
+              </Col>
+              <Col lg={6} lgOffset={0} xs={10} xsOffset={1}>
+                <VotingRow
+                  positionCode="finofficer"
+                  positionName="Finance Officer"
+                  candidates={candidates.finofficer} />
+                <VotingRow
+                  positionCode="vp_ea"
+                  positionName="Vice President for External Affairs"
+                  candidates={candidates.vp_ea} />
+                <Row style={style.buttonRow}>
+                  <Col lg={12}>
+                    <RaisedButton
+                      label="Submit"
+                      labelPosition="before"
+                      primary={true} />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Col> 
         </Row>
       </Grid>
     )
@@ -93,3 +156,9 @@ class VotingPage extends Component {
 }
 
 export default VotingPage
+
+// Al Bontogon - President
+// Nica Medrano - Executive Vice President
+// Lester VIoleta - FInance Officer
+// Jonathan Ventura - Secretary General
+// Shaina Loria - Vice PResident for External Affairs

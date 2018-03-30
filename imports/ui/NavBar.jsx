@@ -7,6 +7,9 @@ import { yellow500, grey800 } from 'material-ui/styles/colors'
 import LogoutButton from './LogoutButton'
 
 const style = {
+  appBar: {
+    backgroundColor: yellow500,
+  },
   titleStyle: {
     color: grey800,
     fontFamily: "'Cormorant Garamond', serif",
@@ -15,14 +18,12 @@ const style = {
 }
 const NavBar = (props) => {
   return (
-    <Row style={{margin:0}}>
-      <AppBar
-        showMenuIconButton={false}
-        style={{backgroundColor: yellow500}}
-        title="AECES Voting System"
-        titleStyle={style.titleStyle}
-        iconElementRight={<LogoutButton />} />
-    </Row>
+    <AppBar
+      showMenuIconButton={false}
+      style={style.appBar}
+      title="AECES Voting System"
+      titleStyle={style.titleStyle}
+      iconElementRight={<LogoutButton />} />
   )
 }
 
