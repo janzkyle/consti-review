@@ -2,10 +2,16 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Email } from 'meteor/email'
+import { Papa } from 'meteor/harrison:papa-parse'
+
+import generator from 'generate-password'
 
 import { Votes } from '/imports/api/votes'
 import { Voted } from '/imports/api/voted'
 import '/imports/api/accounts'
+
+let csv = Assets.getText('AECESMembers.csv')
+let memberRows = Papa.parse(csv).data
 
 Meteor.startup(() => {
   // fix url reset link bug
@@ -44,4 +50,30 @@ Meteor.startup(() => {
     })
   }
   /*-- Auto Seed Code End --*/
+
+  /*== Member CSV Parse ==*/
+  let lastName, firstName, email, currentMemberRow
+  let passwords = generator.generateMultiple(memberRows.length, {
+    length: 10,
+  })
+
+  for (let i = 0; i < memberRows.length; i++) {
+    currentMemberRow = memberRows[i]
+    lastName = currentMemberRow[0]
+    firstName = currentMemberRow[1]
+    email = currentMemberRow[7]
+    password = passwords[i]
+
+    console.log(`[Member] ${lastName}, ${firstName} | email: ${email} , password: ${password}`)
+  }
+  /*-- Member CSV Parse End --*/
+
+  /*== Meteor Email Test ==*/
+  // Email.send({
+  //   from: 'AECES Comelec <aeces.elections@gmail.com>',
+  //   to: 'levymedina3@gmail.com',
+  //   subject: 'Random Generated Voting Password',
+  //   text: 'eyboss'
+  // })
+  /*-- Meteor Email Test End --*/
 })
