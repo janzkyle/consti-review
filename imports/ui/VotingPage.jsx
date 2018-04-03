@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Divider, RaisedButton } from 'material-ui'
+import { Divider, RaisedButton, Dialog } from 'material-ui'
 import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
 
 import VotingRow from './VotingRow'
@@ -118,6 +118,8 @@ class VotingPage extends Component {
       secgen: null,
       finofficer: null,
       vp_ea: null,
+      open: false,
+      message: "",
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -128,6 +130,10 @@ class VotingPage extends Component {
   handleOnChange = (key, e) => {
     e.preventDefault()
     this.setState({ [key]: e.target.value })
+  }
+
+  handleOnRequestClose = () => {
+    this.setState({ open: false })
   }
 
   handleOnSubmit = () => {
@@ -144,16 +150,30 @@ class VotingPage extends Component {
 
       Meteor.call('votes.insert', param,(err, result) => {
         if (err) {
-          console.log(err)
+          this.setState({
+              message: "Error submitting votes"
+            }, () => {
+              this.setState({ open: true, })
+              throw err
+            })
           throw err
         } else {
-          console.log('Result:', result)
           Meteor.call('voted.insert', (err, result) => {
             if (err) {
-              console.log(err)
+              this.setState({
+                  message: "Error occured"
+                }, () => {
+                  this.setState({ open: true, })
+                  throw err
+                })
               throw err
             } else {
-              console.log('Vote successful')
+              this.setState({
+                  message: "Success! Vote recorded."
+                }, () => {
+                  this.setState({ open: true, })
+                  throw err
+                })
             }
           })
         }
@@ -225,6 +245,13 @@ class VotingPage extends Component {
                   </Col>
                 </Row>
               </Col>
+              <Dialog
+                title="Vote Submission Result"
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleOnRequestClose} >
+                { this.state.message }
+              </Dialog>
             </Row>
           </Col> 
         </Row>

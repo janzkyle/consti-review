@@ -155,8 +155,7 @@ class InstructionsPage extends Component {
             open={this.state.open}
             message={this.state.message}
             autoHideDuration={2000}
-            onRequestClose={this.handleRequestClose}
-          />
+            onRequestClose={this.handleRequestClose} />
         </Row>
       </Grid>
     )

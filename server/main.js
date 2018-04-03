@@ -49,6 +49,7 @@ Meteor.startup(() => {
       Votes.insert(vote)
     })
   }
+
   /*-- Auto Seed Code End --*/
 
   // CSV to Accounts and onetime email send
@@ -63,21 +64,24 @@ Meteor.startup(() => {
     firstName = currentMemberRow[1]
     email = currentMemberRow[7]
     password = passwords[i]
-  
-    // Accounts.createUser({ email, password }, (err) => {
-    //   if (err) {
-    //     console.log(err)
-    //     throw err
-    //   }
-
-    //   // Email.send({
-    //   //   from: 'AECES Comelec <aeces.elections@gmail.com>',
-    //   //   to: email,
-    //   //   subject: 'Random Generated Voting Password',
-    //   //   text: `Your password for the Comelec System is ${password}. Please do not reply to this email.`
-    //   // })
-    // })
 
     console.log(`[Member] ${lastName}, ${firstName} | email: ${email} , password: ${password}`)
+
+    try {
+      if (!Accounts.findUserByEmail(email)) {
+        console.log('Adding to accounts...')
+        Accounts.createUser({ email, password })
+        console.log('Emailing...')
+        Email.send({
+          from: 'AECES Comelec <aeces.elections@gmail.com>',
+          to: `${email}`,
+          subject: 'Random Generated Voting Password',
+          text: `Your password for the Comelec System is ${password}. Please do not reply to this email.`
+        })
+      }
+    } catch (err) {
+      console.log(err)
+      throw err
+    }
   }
 })
