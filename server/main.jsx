@@ -51,7 +51,7 @@ Meteor.startup(() => {
   }
   /*-- Auto Seed Code End --*/
 
-  /*== Member CSV Parse ==*/
+  // CSV to Accounts and onetime email send
   let lastName, firstName, email, currentMemberRow
   let passwords = generator.generateMultiple(memberRows.length, {
     length: 10,
@@ -63,17 +63,21 @@ Meteor.startup(() => {
     firstName = currentMemberRow[1]
     email = currentMemberRow[7]
     password = passwords[i]
+  
+    // Accounts.createUser({ email, password }, (err) => {
+    //   if (err) {
+    //     console.log(err)
+    //     throw err
+    //   }
+
+    //   // Email.send({
+    //   //   from: 'AECES Comelec <aeces.elections@gmail.com>',
+    //   //   to: email,
+    //   //   subject: 'Random Generated Voting Password',
+    //   //   text: `Your password for the Comelec System is ${password}. Please do not reply to this email.`
+    //   // })
+    // })
 
     console.log(`[Member] ${lastName}, ${firstName} | email: ${email} , password: ${password}`)
   }
-  /*-- Member CSV Parse End --*/
-
-  /*== Meteor Email Test ==*/
-  // Email.send({
-  //   from: 'AECES Comelec <aeces.elections@gmail.com>',
-  //   to: 'levymedina3@gmail.com',
-  //   subject: 'Random Generated Voting Password',
-  //   text: 'eyboss'
-  // })
-  /*-- Meteor Email Test End --*/
 })
