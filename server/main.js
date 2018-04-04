@@ -76,7 +76,7 @@ Meteor.startup(() => {
           from: 'AECES Comelec <aeces.elections@gmail.com>',
           to: `${email}`,
           subject: 'Random Generated Voting Password',
-          text: `Your password for the Comelec System is ${password}. Please do not reply to this email.`
+          text: `Your password for the Comelec System is ${password}. You may vote at http://bit.ly/AECES-VOTES2018. Please do not reply to this email.`
         })
       }
     } catch (err) {
