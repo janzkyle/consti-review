@@ -161,7 +161,7 @@ class VotingPage extends Component {
           Meteor.call('voted.insert', (err, result) => {
             if (err) {
               this.setState({
-                  message: "Error occured"
+                  message: "Cannot vote more than once"
                 }, () => {
                   this.setState({ open: true, })
                   throw err
