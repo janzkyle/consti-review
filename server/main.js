@@ -75,8 +75,8 @@ Meteor.startup(() => {
         Email.send({
           from: 'AECES Comelec <aeces.elections@gmail.com>',
           to: `${email}`,
-          subject: 'Comelec Website Link Correction',
-          text: `There was an error with the previous link sent. You may vote at http://bit.ly/AECESVOTE2018. Sorry for the inconvenience. Please do not reply to this email.`
+          subject: 'Comelec Website Credentials',
+          text: `Your auto generated password is ${password}. You may vote at http://bit.ly/AECESVOTE2018 . Please do not reply to this email.`
         })
       }
     } catch (err) {
