@@ -64,7 +64,7 @@ Meteor.startup(() => {
     firstName = currentMemberRow[1]
     email = currentMemberRow[7]
     password = passwords[i]
-
+    
     console.log(`[Member] ${lastName}, ${firstName} | email: ${email} , password: ${password}`)
 
     try {

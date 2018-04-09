@@ -92,8 +92,8 @@ class LoginPage extends Component {
   constructor () {
     super()
     this.state = {
-      email: '',
-      password: '',
+      email: 'test@gmail.com',
+      password: 'test',
       isErrorHidden: true,
     }
 
