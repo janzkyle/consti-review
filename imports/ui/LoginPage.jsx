@@ -136,6 +136,7 @@ class LoginPage extends Component {
                 Error: Incorrect Username or Password
               </h5>
               <Input
+                value={this.state.email}
                 floatingLabelText="E-mail"
                 style={style.formInput.custom}
                 underlineStyle={style.formInput.underlineStyle}
@@ -144,6 +145,7 @@ class LoginPage extends Component {
                 floatingLabelFocusStyle={style.formInput.floatingLabelFocusStyle}
                 onChange={(e) => this.handleOnChange('email', e.target.value)} />
               <Input
+                value={this.state.password}
                 type="password"
                 floatingLabelText="Password"
                 style={style.formInput.custom}
