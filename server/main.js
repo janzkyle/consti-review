@@ -10,7 +10,7 @@ import { Votes } from '/imports/api/votes'
 import { Voted } from '/imports/api/voted'
 import '/imports/api/accounts'
 
-let csv = Assets.getText('AECESMembers.csv')
+let csv = Assets.getText('AECESMembersTest.csv')
 let memberRows = Papa.parse(csv).data
 
 Meteor.startup(() => {
@@ -19,9 +19,8 @@ Meteor.startup(() => {
     url = url.replace('#/', '')
     return " To reset your password, simply click the link below:\n\n" + url
   }
-  
   // Set mailing smtp server
-  process.env.MAIL_URL = 'smtp://aeces.elections@gmail.com:AECESvotes2018@smtp.gmail.com:587'
+  process.env.MAIL_URL = 'smtp://aecescomelec2020@gmail.com:AECESvotes2020@smtp.gmail.com:587'
 
   /*== Mongo Schema Constraints ==*/
   Votes._ensureIndex({ id: 1 }, { unique: true })
@@ -73,7 +72,7 @@ Meteor.startup(() => {
         Accounts.createUser({ email, password })
         console.log('Emailing...')
         Email.send({
-          from: 'AECES Comelec <aeces.elections@gmail.com>',
+          from: 'AECES Comelec <aecescomelec2020@gmail.com>',
           to: `${email}`,
           subject: 'Comelec Website Credentials',
           text: `Your auto generated password is ${password}. You may vote at http://bit.ly/AECESVOTE2018 . Please do not reply to this email.`
