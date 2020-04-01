@@ -20,7 +20,7 @@ Meteor.startup(() => {
     return " To reset your password, simply click the link below:\n\n" + url
   }
   // Set mailing smtp server
-  process.env.MAIL_URL = 'smtp://aecescomelec2020@gmail.com:AECESvotes2020@smtp.gmail.com:587'
+  process.env.MAIL_URL = 'smtps://aecescomelec2020@gmail.com:AECESvotes2020@smtp.gmail.com:465'
 
   /*== Mongo Schema Constraints ==*/
   Votes._ensureIndex({ id: 1 }, { unique: true })
@@ -29,16 +29,8 @@ Meteor.startup(() => {
 
   /*== Candidate Auto Seed ==*/
   const seed = [
-    { id: 1, name: 'Al Bontogon', votes: 0 },
-    { id: 2, name: 'Abstain-President', votes: 0 },
-    { id: 3, name: 'Nica Medrano', votes: 0 },
-    { id: 4, name: 'Abstain-EVP', votes: 0 },
-    { id: 5, name: 'Jonathan Ventura', votes: 0 },
-    { id: 6, name: 'Abstain-SecGen', votes: 0 },
-    { id: 7, name: 'Lester Violeta', votes: 0 },
-    { id: 8, name: 'Abstain-FinOfficer', votes: 0 },
-    { id: 9, name: 'Shaina Loria', votes: 0 },
-    { id: 10, name: 'Abstain-VP_EA', votes: 0 }
+    { id: 1, name: 'Yes', votes: 0 },
+    { id: 2, name: 'No', votes: 0 }
   ]
 
   const isSeeded = Votes.find({ id: { $in : [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] } }).count() > 0
@@ -74,7 +66,7 @@ Meteor.startup(() => {
         Email.send({
           from: 'AECES Comelec <aecescomelec2020@gmail.com>',
           to: `${email}`,
-          subject: 'Comelec Website Credentials',
+          subject: 'Constitutional Review Credentials',
           text: `Your auto generated password is ${password}. You may vote at http://bit.ly/AECESVOTE2018 . Please do not reply to this email.`
         })
       }
