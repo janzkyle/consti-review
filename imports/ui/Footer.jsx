@@ -18,11 +18,11 @@ const Footer = () => {
           <Row>
             <Col lg={12}>
               <p>
-                Don't hesitate to message the AECES Comelec with regards to bugs,
+                Don't hesitate to message AECES with regards to bugs,
                 problems, comments, and suggestions for the app.
               </p>
               <p>
-                This application is managed by the AECES Comelec.
+                This application is managed by AECES.
               </p>
             </Col>
           </Row>
@@ -65,6 +65,14 @@ const Footer = () => {
               id="linkedin-link"
               href="https://www.linkedin.com/in/levy-medina-ii">
               Levy V. Medina II
+            </a>
+          </Col>
+          <Col lg={10} lgOffset={1}>
+            Maintained by&nbsp;
+            <a
+              id="linkedin-link"
+              href="https://www.linkedin.com/in/janzrelkyleordona">
+              Janzrel Kyle Ordona
             </a>
           </Col>
         </Row>

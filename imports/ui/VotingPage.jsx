@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Divider, RaisedButton, Dialog } from 'material-ui'
+import { Divider, RaisedButton, Dialog, Checkbox } from 'material-ui'
 import { grey500, grey700, grey800 } from 'material-ui/styles/colors'
 
 import VotingRow from './VotingRow'
@@ -54,18 +54,19 @@ const style = {
   },
   divider: {
     backgroundColor: grey500,
-    marginBottom: 10,
+    marginTop: 15,
+    marginBottom: 15,
   }
 }
 const candidates = {
-  president: [
+  choices: [
     {
       id: 1,
-      name: 'Yes',
+      name: 'I approve of the changes made.',
     },
     {
       id: 2,
-      name: 'No',
+      name: 'I do not approve of the changes made.',
     },
   ],
 }
@@ -73,12 +74,14 @@ class VotingPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      president: null,
+      choices: null,
       open: false,
       message: "",
+      read: false
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
     this.handleOnSubmit = this.handleOnSubmit.bind(this)
     this.isVoteComplete = this.isVoteComplete.bind(this)
   }
@@ -86,6 +89,10 @@ class VotingPage extends Component {
   handleOnChange = (key, e) => {
     e.preventDefault()
     this.setState({ [key]: e.target.value })
+  }
+
+  handleCheckbox = () => {
+    this.setState({ read: !this.state.read })
   }
 
   handleOnRequestClose = () => {
@@ -97,13 +104,13 @@ class VotingPage extends Component {
       throw err
     } else {
       const param = [
-        this.state.president
+        this.state.choices
       ]
 
       Meteor.call('votes.insert', param,(err, result) => {
         if (err) {
           this.setState({
-              message: "Cannot vote more than once"
+              message: "You cannot change your answer anymore"
             }, () => {
               this.setState({ open: true, })
               throw err
@@ -113,7 +120,7 @@ class VotingPage extends Component {
           Meteor.call('voted.insert', (err, result) => {
             if (err) {
               this.setState({
-                  message: "Cannot vote more than once"
+                  message: "You cannot change your answer anymore"
                 }, () => {
                   this.setState({ open: true, })
                   throw err
@@ -121,7 +128,7 @@ class VotingPage extends Component {
               throw err
             } else {
               this.setState({
-                  message: "Success! Vote recorded."
+                  message: "Thank you for reviewing the Constitution!"
                 }, () => {
                   this.setState({ open: true, })
                   throw err
@@ -134,7 +141,7 @@ class VotingPage extends Component {
   }
 
   isVoteComplete = () => {
-    if (this.state.president == null) {
+    if (this.state.choices == null) {
       return false
     } else {
       return true
@@ -146,32 +153,50 @@ class VotingPage extends Component {
       <Grid style={style.page}>
         <Row style={style.formContainer}>
           <Col>
-            <Row style={{marginTop:25}}>
-              <Row>
-                <Col lg={10} lgOffset={1} xs={10} xsOffset={1}>
-                  <Row style={style.pageHeader}> <h1> VOTING PAGE </h1> </Row>
-                  <Divider style={style.divider}/>
+            <Row style={{marginTop:50}}>
+              <Row style={style.pageHeader}>
+                <Col>
+                  <h3>Kindly review the changes in the AECES Constitution 2020 thoroughly:</h3> 
                 </Col>
               </Row>
-              <Col lg={6} lgOffset={0} xs={10} xsOffset={1}>
+              <Row style={style.formContainer}>
+                <Col>
+                  <h4><a target="_blank" href="https://facebook.com">2020 Constitution</a></h4>
+                  <h4><a target="_blank" href="https://facebook.com">2016 Constitution</a></h4>
+                  <h4><a target="_blank" href="https://facebook.com">Comparison of changes</a></h4>
+                </Col>
+              </Row>
+              <Divider style={style.divider}/>
+              <Row style={style.formContainer}>
+                <Col lgOffset={1}>
+                  <Checkbox 
+                    label={"I have read and understood the proposed changes in the 2020 Constitution"}
+                    defaultChecked={this.state.read}
+                    onCheck={this.handleCheckbox}
+                  />
+                </Col>
+              </Row>
+              <Row style={style.formContainer}>
                 <VotingRow
-                  positionCode="president"
-                  positionName="President"
-                  candidates={candidates.president}
+                  positionCode="choices"
+                  candidates={candidates.choices}
+                  disabled={!this.state.read}
                   onChange={this.handleOnChange} />
-              </Col>
-              <Col lg={6} lgOffset={0} xs={10} xsOffset={1}>
-                <Row style={style.buttonRow}>
-                  <Col lg={12}>
-                    <RaisedButton
-                      label="Submit"
-                      labelPosition="before"
-                      primary={true}
-                      disabled={!this.isVoteComplete()}
-                      onClick={() => this.handleOnSubmit()} />
-                  </Col>
-                </Row>
-              </Col>
+              </Row>
+              <Row style={style.formContainer}>
+                <Col>
+                  <Row style={style.buttonRow}>
+                    <Col lg={12}>
+                      <RaisedButton
+                        label="Submit"
+                        labelPosition="before"
+                        primary={true}
+                        disabled={!this.isVoteComplete()}
+                        onClick={() => this.handleOnSubmit()} />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
               <Dialog
                 title="Vote Submission Result"
                 modal={false}
@@ -188,9 +213,3 @@ class VotingPage extends Component {
 }
 
 export default VotingPage
-
-// Al Bontogon - President
-// Nica Medrano - Executive Vice President
-// Lester VIoleta - FInance Officer
-// Jonathan Ventura - Secretary General
-// Shaina Loria - Vice PResident for External Affairs

@@ -21,7 +21,7 @@ const NavBar = (props) => {
     <AppBar
       showMenuIconButton={false}
       style={style.appBar}
-      title="AECES Voting System"
+      title="AECES Constitutional Review"
       titleStyle={style.titleStyle}
       iconElementRight={<LogoutButton />} />
   )

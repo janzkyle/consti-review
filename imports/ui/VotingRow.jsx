@@ -21,7 +21,6 @@ class VotingRow extends Component {
   render() {
     return(
       <Grid fluid={true}>
-        <Row> <h2>{ this.props.positionName }</h2> </Row>
         <Row>
           <RadioButtonGroup
             name={this.props.positionCode}
@@ -32,6 +31,7 @@ class VotingRow extends Component {
                   <RadioButton
                     label={candidate.name}
                     value={candidate.id}
+                    disabled = {this.props.disabled}
                     key={key}/>
                 )
               })

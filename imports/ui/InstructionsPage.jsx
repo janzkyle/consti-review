@@ -142,10 +142,10 @@ class InstructionsPage extends Component {
                 onClick={() => this.handleOnSubmit()} />
             </Row>
             <Row style={style.instructionRow}>
-              <h3 style={{textAlign:"center"}}> 2. Please tick the candidate you are voting for </h3>
+              <h3 style={{textAlign:"center"}}> 2. Go to Review Consti Section and read the changes. </h3>
             </Row>
             <Row style={style.instructionRow}>
-              <h3 style={{textAlign:"center"}}> 3. Double check your vote before submitting! </h3>
+              <h3 style={{textAlign:"center"}}> 3. Answer </h3>
             </Row>
             <Row style={style.instructionRow}>
               <h3 style={{textAlign:"center"}}> 4. Hit <strong>Submit</strong>! </h3>

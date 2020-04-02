@@ -8,7 +8,7 @@ const Logo = (props) => {
   return(
     <div id="logo-container-left" onClick={() => FlowRouter.redirect('/')}>
       <div id="logo-container-right">
-        <h1 id="logo"> AECES Comelec </h1>
+        <h1 id="logo"> AECES Constitution Review </h1>
       </div>
     </div>
   )

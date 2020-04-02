@@ -92,8 +92,8 @@ class LoginPage extends Component {
   constructor () {
     super()
     this.state = {
-      email: 'test@gmail.com',
-      password: 'test',
+      email: '',
+      password: '',
       isErrorHidden: true,
     }
 
@@ -125,6 +125,7 @@ class LoginPage extends Component {
   render () {
     return (
       <div>
+        <input type="hidden" value="something"/>
         <Grid fluid={true} style={style.page}>
           <Col smHidden lg={6} style={style.logoSection}>
             <Logo />
@@ -139,6 +140,7 @@ class LoginPage extends Component {
                 value={this.state.email}
                 floatingLabelText="E-mail"
                 style={style.formInput.custom}
+                autoFocus
                 underlineStyle={style.formInput.underlineStyle}
                 underlineFocusStyle={style.formInput.underlineFocusStyle}
                 floatingLabelStyle={style.formInput.floatingLabelStyle}
