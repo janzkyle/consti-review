@@ -5,15 +5,15 @@ import { Email } from 'meteor/email'
 import { Papa } from 'meteor/harrison:papa-parse'
 
 import generator from 'generate-password'
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 
 import { Votes } from '/imports/api/votes'
 import { Voted } from '/imports/api/voted'
 import '/imports/api/accounts'
 
-dotenv.config({
-  path: Assets.absoluteFilePath('.env')
-})
+// dotenv.config({
+//   path: Assets.absoluteFilePath('.env')
+// })
 
 let csv = Assets.getText('AECESMembersTest.csv')
 let memberRows = Papa.parse(csv).data
