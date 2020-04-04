@@ -15,7 +15,7 @@ const style = {
   formContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   pageHeader: {
     fontWeight: 700,
@@ -155,13 +155,13 @@ class VotingPage extends Component {
           <Col>
             <Row style={{marginTop:50}}>
               <Row style={style.pageHeader}>
-                <Col>
+                <Col lg={10} lgOffset={1}>
                   <h3>Kindly review the changes in the AECES Constitution 2020 thoroughly:</h3> 
                 </Col>
               </Row>
               <Row style={style.formContainer}>
                 <Col>
-                  <h4><a target="_blank" href="bit.ly/AECESConsti2020Amendments">bit.ly/AECESConsti2020Amendments</a></h4>
+                  <h4><a target="_blank" href="https://bit.ly/AECESConsti2020Amendments">bit.ly/AECESConsti2020Amendments</a></h4>
                 </Col>
               </Row>
               <Divider style={style.divider}/>

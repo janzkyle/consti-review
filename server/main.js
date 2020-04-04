@@ -15,7 +15,7 @@ import '/imports/api/accounts'
 //   path: Assets.absoluteFilePath('.env')
 // })
 
-let csv = Assets.getText('AECESCB1920Test.csv')
+let csv = Assets.getText('AECESCB1920.csv')
 let memberRows = Papa.parse(csv).data
 
 Meteor.startup(() => {
