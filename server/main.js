@@ -5,17 +5,17 @@ import { Email } from 'meteor/email'
 import { Papa } from 'meteor/harrison:papa-parse'
 
 import generator from 'generate-password'
-// import dotenv from 'dotenv'
+import dotenv from 'dotenv'
 
 import { Votes } from '/imports/api/votes'
 import { Voted } from '/imports/api/voted'
 import '/imports/api/accounts'
 
-// dotenv.config({
-//   path: Assets.absoluteFilePath('.env')
-// })
+dotenv.config({
+  path: Assets.absoluteFilePath('.env')
+})
 
-let csv = Assets.getText('AECESMembersTest.csv')
+let csv = Assets.getText('AECESCB1920Test.csv')
 let memberRows = Papa.parse(csv).data
 
 Meteor.startup(() => {
@@ -67,10 +67,10 @@ Meteor.startup(() => {
         Accounts.createUser({ email, password })
         console.log('Emailing...')
         Email.send({
-          from: 'AECES Comelec <aecescomelec2020@gmail.com>',
+          from: 'AECES <aeces.ls@obf.ateneo.edu>',
           to: `${email}`,
-          subject: 'Constitutional Review Credentials',
-          text: `Your auto generated password is ${password}. You may login and check the proposed 2020 Constitution at http://bit.ly/AECES2020ConstiWebsite using this email and the generated password. Please do not reply to this email.`
+          subject: 'AECES 2020 Constitutional Review Credentials',
+          text: `Your auto generated password is ${password}. You may login and check the proposed 2020 Constitution at https://aeces-consti.herokuapp.com/ using this email and the generated password. Please do not reply to this email.`
         })
       }
     } catch (err) {

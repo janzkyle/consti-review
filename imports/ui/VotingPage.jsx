@@ -161,9 +161,7 @@ class VotingPage extends Component {
               </Row>
               <Row style={style.formContainer}>
                 <Col>
-                  <h4><a target="_blank" href="https://facebook.com">2020 Constitution</a></h4>
-                  <h4><a target="_blank" href="https://facebook.com">2016 Constitution</a></h4>
-                  <h4><a target="_blank" href="https://facebook.com">Comparison of changes</a></h4>
+                  <h4><a target="_blank" href="bit.ly/AECESConsti2020Amendments">bit.ly/AECESConsti2020Amendments</a></h4>
                 </Col>
               </Row>
               <Divider style={style.divider}/>
